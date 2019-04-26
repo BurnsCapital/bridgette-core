@@ -2,9 +2,9 @@
 const { log } = require('../lib');
 
 // basic functions
-var getBlockNumber = require('./getblocknumber');
+var getBlockNumber = require('./getBlockNumber');
 var getBalance = require('./getBalance');
-var getTransaction = require('./getTransactions');
+var getTransaction = require('./getTransaction');
 var sendSignedTransaction = require('./sendSignedTransaction')
 var getGasPrice = require('./getGasPrice');
 var getBlock = require('./getBlock');
@@ -21,8 +21,7 @@ module.exports = {
     sendSignedTransaction : sendSignedTransaction,
     getGasPrice : getGasPrice,
     getBlock : getBlock,
-    version : version,
-    error : error,
+    version : version
 }
 
 // copy paste 
