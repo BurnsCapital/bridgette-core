@@ -45,14 +45,15 @@ assistant.intent('etc_getBlock', conv => {
 
 //admin functions
 assistant.intent('version', conv => {
-	conv.ask( version() );
+	let payload = version();
+	conv.ask( payload.message );
 });
 
 
 //endflows
 
 //express server
-server.set('port', process.env.PORT || 3434);
+server.set('port', process.env.PORT || 3400);
 server.use(bodyParser.json({type: 'application/json'}));
 
 server.post('/webhook', assistant);
