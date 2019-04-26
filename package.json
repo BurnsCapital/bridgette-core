@@ -1,0 +1,25 @@
+{
+  "name": "bridgette-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "mocha --exit && node index.js",
+    "test": "mocha --exit",
+    "stop": "forever stop index.js"
+  },
+  "author": "bcrd",
+  "license": "APACHE-2",
+  "dependencies": {
+    "actions-on-google": "^2.6.0",
+    "chai": "^4.2.0",
+    "dialogflow": "^0.8.2",
+    "dialogflow-fulfillment": "^0.6.1",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "mocha": "^6.1.4",
+    "request": "^2.88.0",
+    "truffle": "^5.0.14",
+    "winston": "^3.2.1"
+  }
+}
