@@ -5,7 +5,7 @@ log.info('[dflow/controllers/getBlockNumber.js] getBlockNumber loaded');
 //provide a random response
 
 async function getResponse(){
-    var pkg = require('../../package.json');
+    var pkg = require('../package.json');
     var responses = [
         `I am running on version ${pkg}`
     ]
