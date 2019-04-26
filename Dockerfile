@@ -6,5 +6,5 @@ RUN npm install
 RUN npm i -g forever
 CMD ["npm","start"]
 
-EXPOSE 6669
+EXPOSE 3434
 

@@ -52,7 +52,7 @@ assistant.intent('version', conv => {
 //endflows
 
 //express server
-server.set('port', process.env.PORT || 5000);
+server.set('port', process.env.PORT || 3434);
 server.use(bodyParser.json({type: 'application/json'}));
 
 server.post('/webhook', assistant);
