@@ -15,6 +15,7 @@ const { getBlockNumber, getBalance, getTransaction, sendSignedTransaction, getGa
 
 assistant.intent('helloWorld', conv => {
 	let name = conv.parameters.name;
+	console.log();
 	conv.ask('Hello, welcome ' + name);
 });
 
@@ -45,7 +46,7 @@ assistant.intent('etc_getBlock', conv => {
 
 //admin functions
 assistant.intent('version', conv => {
-	let payload = version();
+	var payload = version();
 	conv.ask( payload.message );
 });
 
