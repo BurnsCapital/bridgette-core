@@ -6,6 +6,7 @@ env:
   -CXX=g++-4.8
   -WEB3_URL=http://localhost:8546
   -LOG_LEVEL=info
+  -PORT=5000
 services:
   - docker
 before_install:
