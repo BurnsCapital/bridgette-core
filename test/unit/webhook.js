@@ -33,8 +33,10 @@ describe('Webhook Basic Tests', () => {
         chai.request(app)
         .post('/webhook')
         .send(getBlockNumber)
+        .expect(200)
+        .expect('Content-Type', /json/)
         .end(function(err, res) {
-            console.log(res);
+            console.log(res.body);
             if (err) done(err);
             res.body.should.have.property('payload');
             //res.body.participant.should.have.property('nuid', '98ASDF988SDF89SDF89989SDF9898');
