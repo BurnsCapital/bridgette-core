@@ -16,10 +16,15 @@ async function getResponse(){
     return responses[Math.floor(Math.random() * responses.length)]; 
 }
 
-module.exports = async () =>{
-    let response = getResponse(); 
-    log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + response);
-    return{
-        message : response
-    }
+module.exports = () =>{
+    getResponse()
+    .then( (res) => { 
+        log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + res);
+        return{
+           message : res
+        };
+    })
+    .catch((err) => {
+		log.error('[dflow/controllers/getBlockNumber.js] getResponse(): ' + err);
+	});
 } 
