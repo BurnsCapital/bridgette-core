@@ -5,6 +5,7 @@ const { dialogflow } = require('actions-on-google');
 const server = express();
 const assistant = dialogflow();
 
+const { log } = require('./common');
 const { getBlockNumber, getBalance, getTransaction, sendSignedTransaction, getGasPrice, getBlock, version } = require( "./controllers" );
 
 
@@ -13,39 +14,82 @@ const { getBlockNumber, getBalance, getTransaction, sendSignedTransaction, getGa
 *
 */
 
-assistant.intent('helloWorld', conv => {
-	let name = conv.parameters.name;
-	conv.ask('Hello, welcome ' + name);
-});
-
 assistant.intent('etc_getBlockNumber', conv => {
-	conv.ask( getBlockNumber().message );
+	getBlockNumber()
+	.then( (res) => {
+		log.debug('[index.js] etc_getBlockNumber: req: ' + conv +' res: ' + res);
+		conv.ask( res.message );
+	})
+	.catch((err) => {
+		log.error('[index.js] etc_getBlockNumber: ' + err);
+	});
 });
 
 assistant.intent('etc_getBalance', conv => {
-	conv.ask( getBalance(conv.parameters.account).message );
+	getBalance(conv.parameters.account)
+	.then( (res) => {
+		log.debug('[index.js] etc_getBalance: req: ' + conv +' res: ' + res);
+		conv.ask( res.message );
+	})
+	.catch((err) => {
+		log.error('[index.js] etc_getBalance: ' + err);
+	});
 });
 
 assistant.intent('etc_getTransaction', conv => {
-	conv.ask( getTransaction(conv.parameters.transaction).message );
+	getTransaction(conv.parameters.transaction)
+	.then( (res) => {
+		log.debug('[index.js] etc_getTransaction: req: ' + conv +' res: ' + res);
+		conv.ask( res.message );
+	})
+	.catch((err) => {
+		log.error('[index.js] etc_getTransaction: ' + err);
+	});
 });
 
 assistant.intent('etc_sendSignedTransaction', conv => {
-	conv.ask( sendSignedTransaction(conv.parameters.signedTX).message );
+	sendSignedTransaction(conv.parameters.signedTX)
+	.then( (res) => {
+		log.debug('[index.js] etc_sendSignedTransaction: req: ' + conv +' res: ' + res);
+		conv.ask( res.message );
+	})
+	.catch((err) => {
+		log.error('[index.js] etc_sendSignedTransaction: ' + err);
+	});
 });
 
 assistant.intent('etc_getGasPrice', conv => {
-	conv.ask( getGasPrice().message );
+	getGasPrice()
+	.then( (res) => {
+		log.debug('[index.js] etc_getGasPrice: req: ' + conv +' res: ' + res);
+		conv.ask( res.message );
+	})
+	.catch((err) => {
+		log.error('[index.js] etc_getGasPrice: ' + err);
+	});
 });
 
-
 assistant.intent('etc_getBlock', conv => {
-	conv.ask( getBlock(conv.parameters.blockNumber).message );
+	getBlock(conv.parameters.blockNumber)
+	.then( (res) => {
+		log.debug('[index.js] etc_getBlock: req: ' + conv +' res: ' + res);
+		conv.ask( res.message );
+	})
+	.catch((err) => {
+		log.error('[index.js] etc_getBlock: ' + err);
+	});
 });
 
 //admin functions
-assistant.intent('version', conv => {
-	conv.ask( version().message );
+assistant.intent('etc_version', conv => {
+	version()
+	.then( (res) => {
+		log.debug('[index.js] etc_version: req: ' + conv +' res: ' + res);
+		conv.ask( res.message );
+	})
+	.catch((err) => {
+		log.error('[index.js] etc_version: ' + err);
+	});
 });
 
 
