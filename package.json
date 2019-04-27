@@ -1,6 +1,6 @@
 {
-  "name": "bridgette-core",
-  "version": "1.0.0",
+  "name": "bridgette-etc-core",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
