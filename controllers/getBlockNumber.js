@@ -16,9 +16,9 @@ async function getResponse(){
     return responses[Math.floor(Math.random() * responses.length)]; 
 }
 
-module.exports = () =>{
+module.exports = async () =>{
     console.log('calls getblocknumber');
-    getResponse()
+    await getResponse()
     .then( (res) => { 
         console.log(res);
         log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + res);
