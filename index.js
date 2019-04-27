@@ -45,7 +45,6 @@ assistant.intent('etc_getBlock', conv => {
 
 //admin functions
 assistant.intent('version', conv => {
-	var payload = version();
 	conv.ask( version().message );
 });
 
