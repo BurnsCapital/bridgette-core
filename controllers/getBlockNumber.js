@@ -26,7 +26,7 @@ async function getResponse(){
 
 module.exports = async () => {
     log.debug('calls getblocknumber');
-    let res = getResponse();
+    let res = await getResponse();
     log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + res);
     return{
            message : res
