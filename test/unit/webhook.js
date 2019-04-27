@@ -34,14 +34,14 @@ describe('Webhook Basic Tests', () => {
         .post('/webhook')
         .send(getBlockNumber)
         .end(function(err, res) {
-          if (err) done(err);
-          res.body.should.have.property('payload');
-          expect(res).to.have.status(200);
-          //res.body.participant.should.have.property('nuid', '98ASDF988SDF89SDF89989SDF9898');
-           });
+            if (err) done(err);
+            res.body.should.have.property('payload');
+            //res.body.participant.should.have.property('nuid', '98ASDF988SDF89SDF89989SDF9898');
+             });
         done();
         });
     });
+    
     describe('Test getbalance', () => {
         it('returns status 200 with a payload', (done) => {
         chai.request(app)
