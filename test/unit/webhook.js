@@ -34,6 +34,7 @@ describe('Webhook Basic Tests', () => {
         .post('/webhook')
         .send(getBlockNumber)
         .end(function(err, res) {
+            console.log(res);
             if (err) done(err);
             res.body.should.have.property('payload');
             //res.body.participant.should.have.property('nuid', '98ASDF988SDF89SDF89989SDF9898');
