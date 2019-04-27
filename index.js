@@ -5,7 +5,7 @@ const { dialogflow } = require('actions-on-google');
 const server = express();
 const assistant = dialogflow();
 
-const { log } = require('./common');
+const { log } = require('./lib');
 const { getBlockNumber, getBalance, getTransaction, sendSignedTransaction, getGasPrice, getBlock, version } = require( "./controllers" );
 
 
