@@ -1,6 +1,10 @@
 const assert = require('assert');
 const { expect } = require('chai');
-const request = require('request');
+var chai = require('chai');
+var chaiHttp = require('chai-http');
+
+chai.use(chaiHttp);
+
 
 //* unit under test *//
 
@@ -27,7 +31,7 @@ describe('Webhook Basic Tests', () => {
     
     describe('Test getblocknumber', () => {
         it('returns status 200 with a payload', (done) => {
-        request(app)
+        chai.request(app)
         .post('/webhook')
         .send(getBlockNumber)
         .expect(200)
@@ -42,7 +46,7 @@ describe('Webhook Basic Tests', () => {
     });
     describe('Test getbalance', () => {
         it('returns status 200 with a payload', (done) => {
-        request(app)
+        chai.request(app)
         .post('/webhook')
         .send(getBalance)
         .expect(200)
@@ -58,7 +62,7 @@ describe('Webhook Basic Tests', () => {
     
     describe('Test getTransaction', () => {
         it('returns status 200 with a payload', (done) => {
-        request(app)
+        chai.request(app)
         .post('/webhook')
         .send(getTransaction)
         .expect(200)
@@ -74,7 +78,7 @@ describe('Webhook Basic Tests', () => {
     
     describe('Test sendSigned transaction', () => {
         it('returns status 200 with a payload', (done) => {
-        request(app)
+        chai.request(app)
         .post('/webhook')
         .send(sendSignedTransaction)
         .expect(200)
@@ -90,7 +94,7 @@ describe('Webhook Basic Tests', () => {
     
     describe('Test getgasprice', () => {
         it('returns status 200 with a payload', (done) => {
-        request(app)
+        chai.request(app)
         .post('/webhook')
         .send(getGasPrice)
         .expect(200)
@@ -106,7 +110,7 @@ describe('Webhook Basic Tests', () => {
     
     describe('Test getblock', () => {
         it('returns status 200 with a payload', (done) => {
-        request(app)
+        chai.request(app)
         .post('/webhook')
         .send(getBlock)
         .expect(200)
@@ -122,7 +126,7 @@ describe('Webhook Basic Tests', () => {
     
     describe('Test version', () => {
         it('returns status 200 with a payload', (done) => {
-        request(app)
+        chai.request(app)
         .post('/webhook')
         .send(version)
         .expect(200)
