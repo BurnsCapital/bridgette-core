@@ -4,9 +4,9 @@ log.info('[dflow/controllers/getBlockNumber.js] getBlockNumber loaded');
 
 //provide a random response
 
-async function getResponse(){
+function getResponse(){
     //get the block number
-    await web3.eth.getBlockNumber()
+    web3.eth.getBlockNumber()
     .then( (res) => { 
         
         var responses = [
@@ -27,9 +27,9 @@ async function getResponse(){
      
 }
 
-module.exports = async () =>{
+module.exports = () => {
     console.log('calls getblocknumber');
-    await getResponse()
+    getResponse()
     .then( (res) => { 
         console.log(res);
         log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + res);
