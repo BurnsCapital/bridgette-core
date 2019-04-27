@@ -34,10 +34,8 @@ describe('Webhook Basic Tests', () => {
         .post('/webhook')
         .send(getBlockNumber)
         .end(function(err, res) {
-            //console.log("test res: "+ JSON.stringify(res));
             if (err) done(err);
             expect(res).to.have.status(200);
-            expect(res).to.have.Content-Type(application/json);    
         });
         done();
         });
