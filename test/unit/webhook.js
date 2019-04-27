@@ -46,13 +46,10 @@ describe('Webhook Basic Tests', () => {
         chai.request(app)
         .post('/webhook')
         .send(getBalance)
-        .expect(200)
-        .expect('Content-Type', /json/)
         .end(function(err, res) {
-          if (err) done(err);
-          res.body.should.have.property('payload');
-          //res.body.participant.should.have.property('nuid', '98ASDF988SDF89SDF89989SDF9898');
-           });
+            if (err) done(err);
+            expect(res).to.have.status(200);
+        });
         done();
         });
     });
@@ -62,13 +59,10 @@ describe('Webhook Basic Tests', () => {
         chai.request(app)
         .post('/webhook')
         .send(getTransaction)
-        .expect(200)
-        .expect('Content-Type', /json/)
         .end(function(err, res) {
-          if (err) done(err);
-          res.body.should.have.property('payload');
-          //res.body.participant.should.have.property('nuid', '98ASDF988SDF89SDF89989SDF9898');
-           });
+            if (err) done(err);
+            expect(res).to.have.status(200);
+        });
         done();
         });
     });
@@ -78,13 +72,10 @@ describe('Webhook Basic Tests', () => {
         chai.request(app)
         .post('/webhook')
         .send(sendSignedTransaction)
-        .expect(200)
-        .expect('Content-Type', /json/)
         .end(function(err, res) {
-          if (err) done(err);
-          res.body.should.have.property('payload');
-          //res.body.participant.should.have.property('nuid', '98ASDF988SDF89SDF89989SDF9898');
-           });
+            if (err) done(err);
+            expect(res).to.have.status(200);
+        });
         done();
         });
     });
@@ -94,13 +85,10 @@ describe('Webhook Basic Tests', () => {
         chai.request(app)
         .post('/webhook')
         .send(getGasPrice)
-        .expect(200)
-        .expect('Content-Type', /json/)
         .end(function(err, res) {
-          if (err) done(err);
-          res.body.should.have.property('payload');
-          //res.body.participant.should.have.property('nuid', '98ASDF988SDF89SDF89989SDF9898');
-           });
+            if (err) done(err);
+            expect(res).to.have.status(200);
+        });
         done();
         });
     });
@@ -110,13 +98,10 @@ describe('Webhook Basic Tests', () => {
         chai.request(app)
         .post('/webhook')
         .send(getBlock)
-        .expect(200)
-        .expect('Content-Type', /json/)
         .end(function(err, res) {
-          if (err) done(err);
-          res.body.should.have.property('payload');
-          //res.body.participant.should.have.property('nuid', '98ASDF988SDF89SDF89989SDF9898');
-           });
+            if (err) done(err);
+            expect(res).to.have.status(200);
+        });
         done();
         });
     });
@@ -126,13 +111,10 @@ describe('Webhook Basic Tests', () => {
         chai.request(app)
         .post('/webhook')
         .send(version)
-        .expect(200)
-        .expect('Content-Type', /json/)
         .end(function(err, res) {
-          if (err) done(err);
-          res.body.should.have.property('payload');
-          //res.body.participant.should.have.property('nuid', '98ASDF988SDF89SDF89989SDF9898');
-           });
+            if (err) done(err);
+            expect(res).to.have.status(200);
+        });
         done();
         });
     });
