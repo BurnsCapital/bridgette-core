@@ -6,7 +6,7 @@ log.info('[dflow/controllers/getBlockNumber.js] getBlockNumber loaded');
 
 function getResponse(){
     //get the block number
-   web3.eth.getBlockNumber(
+   web3.eth.getBlockNumber()
     .then( (res) => { 
         
         var responses = [
@@ -31,6 +31,6 @@ module.exports = () => {
     log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + res);
     return{
            message : res
-        };
-    })
-} 
+        
+    };
+}; 
