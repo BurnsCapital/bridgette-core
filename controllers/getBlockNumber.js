@@ -1,4 +1,4 @@
-const { log } = require('../lib');
+const { log, web3 } = require('../lib');
 
 log.info('[dflow/controllers/getBlockNumber.js] getBlockNumber loaded');
 
@@ -6,7 +6,7 @@ log.info('[dflow/controllers/getBlockNumber.js] getBlockNumber loaded');
 
 async function getResponse(){
     //get the block number
-    var bn = 11; //await web3.eth.getBlockNumber();
+    var bn = await web3.eth.getBlockNumber();
     var responses = [
         `The current block height is ${bn}`,
         `We are at block ${bn}`,

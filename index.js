@@ -15,39 +15,38 @@ const { getBlockNumber, getBalance, getTransaction, sendSignedTransaction, getGa
 
 assistant.intent('helloWorld', conv => {
 	let name = conv.parameters.name;
-	console.log();
 	conv.ask('Hello, welcome ' + name);
 });
 
 assistant.intent('etc_getBlockNumber', conv => {
-	conv.ask( getBlockNumber() );
+	conv.ask( getBlockNumber().message );
 });
 
 assistant.intent('etc_getBalance', conv => {
-	conv.ask( getBalance(conv.parameters.account) );
+	conv.ask( getBalance(conv.parameters.account).message );
 });
 
 assistant.intent('etc_getTransaction', conv => {
-	conv.ask( getTransaction(conv.parameters.transaction) );
+	conv.ask( getTransaction(conv.parameters.transaction).message );
 });
 
 assistant.intent('etc_sendSignedTransaction', conv => {
-	conv.ask( sendSignedTransaction(conv.parameters.signedTX) );
+	conv.ask( sendSignedTransaction(conv.parameters.signedTX).message );
 });
 
 assistant.intent('etc_getGasPrice', conv => {
-	conv.ask( getGasPrice() );
+	conv.ask( getGasPrice().message );
 });
 
 
 assistant.intent('etc_getBlock', conv => {
-	conv.ask( getBlock(conv.parameters.blockNumber) );
+	conv.ask( getBlock(conv.parameters.blockNumber).message );
 });
 
 //admin functions
 assistant.intent('version', conv => {
 	var payload = version();
-	conv.ask( payload.message );
+	conv.ask( version().message );
 });
 
 
