@@ -27,18 +27,16 @@ var version = {"queryResult": {"intent": {"name": "","displayName": "etc_version
 module.exports =
 
 describe('Webhook Basic Tests', () => {
-    const app = 'http://localhost:'+ process.env.PORT ;
     
     describe('Test getblocknumber', () => {
         it('returns status 200 with a payload', (done) => {
         chai.request(app)
         .post('/webhook')
         .send(getBlockNumber)
-        .expect(200)
-        .expect('Content-Type', /json/)
         .end(function(err, res) {
           if (err) done(err);
           res.body.should.have.property('payload');
+          expect(res).to.have.status(200);
           //res.body.participant.should.have.property('nuid', '98ASDF988SDF89SDF89989SDF9898');
            });
         done();
