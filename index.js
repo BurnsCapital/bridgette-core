@@ -106,3 +106,5 @@ server.get('/', (req, res) => res.send('Hello World!'))
 server.listen(server.get('port'), function () {
 	console.log('Express server started on port', server.get('port'));
 });
+
+module.exports = server
