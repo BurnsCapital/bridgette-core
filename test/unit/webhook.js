@@ -34,9 +34,9 @@ describe('Webhook Basic Tests', () => {
         .post('/webhook')
         .send(getBlockNumber)
         .end(function(err, res) {
-            console.log("test res: "+ JSON.stringify(res.req.text));
+            console.log("test res: "+ JSON.stringify(res.req));
             if (err) done(err);
-            res.req.text.should.have.property('payload');
+            res.req.should.have.property('payload');
             //res.body.participant.should.have.property('nuid', '98ASDF988SDF89SDF89989SDF9898');
              });
         done();
