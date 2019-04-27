@@ -1,5 +1,6 @@
 const assert = require('assert');
 const { expect } = require('chai');
+const request = require('request');
 
 //* unit under test *//
 
@@ -22,12 +23,12 @@ var version = {"queryResult": {"intent": {"name": "","displayName": "etc_version
 module.exports =
 
 describe('Webhook Basic Tests', () => {
-    const app = 'http://localhost:'+ process.env.PORT +'/webhook';
+    const app = 'http://localhost:'+ process.env.PORT ;
     
     describe('Test getblocknumber', () => {
         it('returns status 200 with a payload', (done) => {
         request(app)
-        .post('/webhook/')
+        .post('/webhook')
         .send(getBlockNumber)
         .expect(200)
         .expect('Content-Type', /json/)
@@ -42,7 +43,7 @@ describe('Webhook Basic Tests', () => {
     describe('Test getbalance', () => {
         it('returns status 200 with a payload', (done) => {
         request(app)
-        .post('/webhook/')
+        .post('/webhook')
         .send(getBalance)
         .expect(200)
         .expect('Content-Type', /json/)
@@ -58,7 +59,7 @@ describe('Webhook Basic Tests', () => {
     describe('Test getTransaction', () => {
         it('returns status 200 with a payload', (done) => {
         request(app)
-        .post('/webhook/')
+        .post('/webhook')
         .send(getTransaction)
         .expect(200)
         .expect('Content-Type', /json/)
@@ -74,7 +75,7 @@ describe('Webhook Basic Tests', () => {
     describe('Test sendSigned transaction', () => {
         it('returns status 200 with a payload', (done) => {
         request(app)
-        .post('/webhook/')
+        .post('/webhook')
         .send(sendSignedTransaction)
         .expect(200)
         .expect('Content-Type', /json/)
@@ -90,7 +91,7 @@ describe('Webhook Basic Tests', () => {
     describe('Test getgasprice', () => {
         it('returns status 200 with a payload', (done) => {
         request(app)
-        .post('/webhook/')
+        .post('/webhook')
         .send(getGasPrice)
         .expect(200)
         .expect('Content-Type', /json/)
@@ -106,7 +107,7 @@ describe('Webhook Basic Tests', () => {
     describe('Test getblock', () => {
         it('returns status 200 with a payload', (done) => {
         request(app)
-        .post('/webhook/')
+        .post('/webhook')
         .send(getBlock)
         .expect(200)
         .expect('Content-Type', /json/)
@@ -122,7 +123,7 @@ describe('Webhook Basic Tests', () => {
     describe('Test version', () => {
         it('returns status 200 with a payload', (done) => {
         request(app)
-        .post('/webhook/')
+        .post('/webhook')
         .send(version)
         .expect(200)
         .expect('Content-Type', /json/)
