@@ -24,7 +24,7 @@ function getResponse(){
 	});
 }
 
-module.exports = () => {
+module.exports = async () => {
     log.debug('calls getblocknumber');
     let res = getResponse();
     
