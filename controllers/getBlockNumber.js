@@ -6,7 +6,7 @@ log.info('[dflow/controllers/getBlockNumber.js] getBlockNumber loaded');
 
 async function getResponse(){
     //get the block number
-    web3.eth.getBlockNumber()
+    await web3.eth.getBlockNumber()
     .then( (res) => { 
         
         var responses = [
@@ -14,7 +14,7 @@ async function getResponse(){
             `We are at block ${res}`,
             `The latest one I see is ${res}`
         ];
-        
+
         log.debug('[dflow/controllers/getBlockNumber.js] possible responses: ' + responses); 
         log.debug('[dflow/controllers/getBlockNumber.js] getBlockNumber(): ' + res);
         return responses[Math.floor(Math.random() * responses.length)];
