@@ -6,7 +6,9 @@ log.info('[dflow/controllers/getBlockNumber.js] getBlockNumber loaded');
 
 function getResponse(){
     //get the block number
-   web3.eth.getBlockNumber( (res) => { 
+   web3.eth.getBlockNumber(
+    .then( (res) => { 
+        
         var responses = [
             `The current block height is ${res}`,
             `We are at block ${res}`,
@@ -16,20 +18,19 @@ function getResponse(){
         log.debug('[dflow/controllers/getBlockNumber.js] possible responses: ' + responses); 
         log.debug('[dflow/controllers/getBlockNumber.js] getBlockNumber(): ' + res);
         return responses[Math.floor(Math.random() * responses.length)];
-    });
+    })
+    .catch((err) => {
+		log.error('[dflow/controllers/getBlockNumber.js] getBlockNumber(): ' + err);
+	});
 }
 
 module.exports = () => {
-    console.log('calls getblocknumber');
-    getResponse()
-    .then( (res) => { 
-        console.log(res);
-        log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + res);
-        return{
+    log.debug('calls getblocknumber');
+    let res = getResponse();
+    
+    log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + res);
+    return{
            message : res
         };
     })
-    .catch((err) => {
-		log.error('[dflow/controllers/getBlockNumber.js] getResponse(): ' + err);
-	});
 } 
