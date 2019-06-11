@@ -5,7 +5,13 @@ const { dialogflow } = require('actions-on-google');
 const server = express();
 const assistant = dialogflow();
 
-const { getBlockNumber, getBalance, getTransaction, sendSignedTransaction, getGasPrice, getBlock, version } = require( "./controllers" );
+const { getBlockNumber, 
+       getBalance, 
+       getTransaction, 
+       sendSignedTransaction, 
+       getGasPrice, 
+       getBlock, 
+       version } = require( "./controllers" );
 
 
 /*
