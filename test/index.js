@@ -9,6 +9,5 @@ var app = require('./unit/app');
 
 /* tests */
 describe('Global functions', function() {
-  env,
-  app
+  env
 });
