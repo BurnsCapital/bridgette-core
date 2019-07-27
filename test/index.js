@@ -11,6 +11,5 @@ var webhook = require('./unit/webhook');
 /* tests */
 describe('Global functions', function() {
   env,
-  app,
   webhook
 });

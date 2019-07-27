@@ -8,11 +8,11 @@ async function getResponse(){
     //get the block number
    await web3.eth.getBlockNumber()
     .then( (res) => { 
-        
         var responses = [
-            `The current block height is ${res}`,
-            `We are at block ${res}`,
-            `The latest one I see is ${res}`
+            `The current block height is ${ res }`,
+            `We are at block ${ res }`,
+            `The latest one I see is ${ res }`,
+            `The last one I saw was ${ res }`
         ];
 
         log.debug('[dflow/controllers/getBlockNumber.js] possible responses: ' + responses); 
@@ -29,7 +29,6 @@ module.exports = async () => {
     let res = await getResponse();
     log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + res);
     return{
-           message : res
-        
+           message : res    
     };
 }; 
