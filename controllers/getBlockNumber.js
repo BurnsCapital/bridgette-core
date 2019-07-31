@@ -16,31 +16,29 @@ function getResponse(res){
         log.debug('[dflow/controllers/getBlockNumber.js] possible responses: ' + responses); 
         log.debug('[dflow/controllers/getBlockNumber.js] getBlockNumber(): ' + res);
         return responses[Math.floor(Math.random() * responses.length)];
-    })
-    .catch((err) => {
-		log.error('[dflow/controllers/getBlockNumber.js] getBlockNumber(): ' + err);
-	});
 }
 
 module.exports = async (blockchain) => {
-    log.debug('calls getblocknumber');
-    switch (blockchain) {
-        case zcash:
-            let bn = await zec.getinfo();
+    log.debug('calls getblocknumber: '+ blockchain);
+    let bn;
+    switch (blockchain.toLowerCase()) {
+        case "zcash":
+            log.debug('case zcash');
+            bn = await zec.getinfo();
             break;
-        case bitcoin:
-            let bn = await btc.getinfo(); 
+        case "bitcoin":
+            log.debug('case bitcoin');
+            bn = await btc.getinfo(); 
             break;
         default:
-            let bn = await btc.getinfo(); 
+            log.debug('case default(bitcoin)');
+            bn = await btc.getinfo(); 
             break;
-    }
-    let res = getResponse(bn.blocks)
-    .catch((err) => {
-		log.error('[dflow/controllers/getBlockNumber.js] getBlockNumber(): ' + err);
-	});
+    };
+
+    let res = getResponse(bn.blocks);
     log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + res);
     return{
-           message : res    
-    };
+            message : res    
+        };
 }; 

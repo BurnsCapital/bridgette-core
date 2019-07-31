@@ -15,15 +15,13 @@ const { getBlockNumber, getBalance, getTransaction, sendSignedTransaction, getGa
 *
 */
 
-assistant.intent('etc_getBlockNumber', (conv, parms) => {
-	getBlockNumber(conv)
-	.then( (res) => {
-		log.debug('[index.js] etc_getBlockNumber: req: ' + conv +' res: ' + res);
-		conv.ask( res.message );
-	})
-	.catch((err) => {
-		log.error('[index.js] etc_getBlockNumber: ' + err);
-	});
+assistant.intent('etc_getBlockNumber', async (conv) => {
+	log.debug('[index.js] etc_getBlockNumber: params: ');
+	log.debug(conv.parameters);
+	let res = await getBlockNumber(conv.parameters.Blockchain)
+
+	log.debug('[index.js] etc_getBlockNumber: req: ' + conv +' res: ' + res);
+	conv.ask( res.message );
 });
 
 assistant.intent('etc_getBalance', conv => {
@@ -94,6 +92,10 @@ assistant.intent('etc_version', conv => {
 });
 
 //error handeling
+assistant.fallback((conv) => {
+	log.debug(conv);
+	conv.ask(`I'm having a little trouble with my node right now, ask again in a little bit.`);
+  });
 
 assistant.catch((conv, error) => {
 	console.error(error);
@@ -104,7 +106,7 @@ assistant.catch((conv, error) => {
 
 //express server
 server.set('port', process.env.PORT || 3400);
-server.use(bodyParser.json({type: 'application/json'}));
+server.use(bodyParser.json());
 
 server.post('/webhook', assistant);
 
