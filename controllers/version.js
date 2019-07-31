@@ -1,6 +1,6 @@
 const { log } = require('../lib');
 
-log.info('[dflow/controllers/getBlockNumber.js] getBlockNumber loaded');
+log.info('[dflow/controllers/version.js] version loaded');
 
 //provide a random response
 
@@ -9,13 +9,13 @@ function getResponse(){
     var responses = [
         `I am running on version ${pkg.version}`
     ]
-    log.debug('[dflow/controllers/getBlockNumber.js] possible responses: ' + responses); 
+    log.debug('[dflow/controllers/version.js] possible responses: ' + responses); 
     return responses[Math.floor(Math.random() * responses.length)]; 
 }
 
 module.exports = () =>{
     let response = getResponse(); 
-    log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + response);
+    log.debug('[dflow/controllers/version.js] getResponse(): ' + response);
     return {
         message: response
     };

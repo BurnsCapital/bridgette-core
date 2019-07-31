@@ -1,25 +1,44 @@
-const { log, web3 } = require('../lib');
+const { log, web3, btc, zec } = require('../lib');
 
 log.info('[dflow/controllers/getBlockNumber.js] getBlockNumber loaded');
 
 //provide a random response
 
-async function getResponse(){
-    //get the block number
-    var bn = await web3.eth.getBlockNumber();
-    var responses = [
-        `The current block height is ${bn}`,
-        `We are at block ${bn}`,
-        `The latest one I see is ${bn}`
-    ]
-    log.debug('[dflow/controllers/getBlockNumber.js] possible responses: ' + responses); 
-    return responses[Math.floor(Math.random() * responses.length)]; 
+function getResponse(res){
+    //get the words 
+        var responses = [
+            `The current block height is ${ res }`,
+            `We are at block ${ res }`,
+            `The latest one I see is ${ res }`,
+            `The last one I saw was ${ res }`
+        ];
+
+        log.debug('[dflow/controllers/getBlockNumber.js] possible responses: ' + responses); 
+        log.debug('[dflow/controllers/getBlockNumber.js] getBlockNumber(): ' + res);
+        return responses[Math.floor(Math.random() * responses.length)];
 }
 
-module.exports = async () =>{
-    let response = getResponse(); 
-    log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + response);
+module.exports = async (blockchain) => {
+    log.debug('calls getblocknumber: '+ blockchain);
+    let bn;
+    switch (blockchain.toLowerCase()) {
+        case "zcash":
+            log.debug('case zcash');
+            bn = await zec.getinfo();
+            break;
+        case "bitcoin":
+            log.debug('case bitcoin');
+            bn = await btc.getinfo(); 
+            break;
+        default:
+            log.debug('case default(bitcoin)');
+            bn = await btc.getinfo(); 
+            break;
+    };
+
+    let res = getResponse(bn.blocks);
+    log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + res);
     return{
-        message : response
-    }
-} 
+            message : res    
+        };
+}; 
