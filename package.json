@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "mocha --exit && node index.js",
+    "start": "node index.js",
     "test": "mocha --exit",
     "stop": "forever stop index.js"
   },
@@ -20,6 +20,7 @@
     "express": "^4.16.4",
     "mocha": "^6.1.4",
     "request": "^2.88.0",
+    "stdrpc": "^1.0.0",
     "truffle": "^5.0.14",
     "web3": "^1.0.0-beta.41",
     "winston": "^3.2.1"

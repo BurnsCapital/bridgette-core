@@ -1,13 +1,11 @@
-const { log, web3 } = require('../lib');
+const { log, web3, btc, zec } = require('../lib');
 
 log.info('[dflow/controllers/getBlockNumber.js] getBlockNumber loaded');
 
 //provide a random response
 
-async function getResponse(){
-    //get the block number
-   await web3.eth.getBlockNumber()
-    .then( (res) => { 
+function getResponse(res){
+    //get the words 
         var responses = [
             `The current block height is ${ res }`,
             `We are at block ${ res }`,
@@ -24,9 +22,23 @@ async function getResponse(){
 	});
 }
 
-module.exports = async () => {
+module.exports = async (blockchain) => {
     log.debug('calls getblocknumber');
-    let res = await getResponse();
+    switch (blockchain) {
+        case zcash:
+            let bn = await zec.getinfo();
+            break;
+        case bitcoin:
+            let bn = await btc.getinfo(); 
+            break;
+        default:
+            let bn = await btc.getinfo(); 
+            break;
+    }
+    let res = getResponse(bn.blocks)
+    .catch((err) => {
+		log.error('[dflow/controllers/getBlockNumber.js] getBlockNumber(): ' + err);
+	});
     log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + res);
     return{
            message : res    

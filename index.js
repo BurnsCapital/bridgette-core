@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const { dialogflow } = require('actions-on-google');
@@ -5,17 +7,16 @@ const { dialogflow } = require('actions-on-google');
 const server = express();
 const assistant = dialogflow();
 
-const { log } = require('./lib');
+const { log, zec } = require('./lib');
 const { getBlockNumber, getBalance, getTransaction, sendSignedTransaction, getGasPrice, getBlock, version } = require( "./controllers" );
-
 
 /*
 * intent flows
 *
 */
 
-assistant.intent('etc_getBlockNumber', conv => {
-	getBlockNumber()
+assistant.intent('etc_getBlockNumber', (conv, parms) => {
+	getBlockNumber(conv)
 	.then( (res) => {
 		log.debug('[index.js] etc_getBlockNumber: req: ' + conv +' res: ' + res);
 		conv.ask( res.message );
@@ -92,6 +93,12 @@ assistant.intent('etc_version', conv => {
 	});
 });
 
+//error handeling
+
+assistant.catch((conv, error) => {
+	console.error(error);
+	conv.ask('I encountered a glitch. Can you say that again?');
+  });
 
 //endflows
 
