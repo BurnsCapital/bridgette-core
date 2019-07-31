@@ -1,4 +1,4 @@
-const { log, web3, btc, zec } = require('../lib');
+const { log, btc, etc, zec } = require('../lib');
 
 log.info('[dflow/controllers/getBlockNumber.js] getBlockNumber loaded');
 
@@ -24,11 +24,17 @@ module.exports = async (blockchain) => {
     switch (blockchain.toLowerCase()) {
         case "zcash":
             log.debug('case zcash');
-            bn = await zec.getinfo();
+            bn = await zec.getinfo().blocks;
             break;
         case "bitcoin":
             log.debug('case bitcoin');
-            bn = await btc.getinfo(); 
+            bn = await btc.getinfo().blocks; 
+            break;
+        case "ethereum classic":
+            log.debug('case etc');
+            console.log(etc);
+            let hexbn = await etc.eth_blockNumber();
+            bn = parseInt(hexbn,16);
             break;
         default:
             log.debug('case default(bitcoin)');
@@ -36,7 +42,7 @@ module.exports = async (blockchain) => {
             break;
     };
 
-    let res = getResponse(bn.blocks);
+    let res = getResponse(bn);
     log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + res);
     return{
             message : res    
