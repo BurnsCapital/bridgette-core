@@ -1,6 +1,6 @@
 const { log } = require('../lib');
 
-log.info('[dflow/controllers/getBlockNumber.js] getBlockNumber loaded');
+log.info('[dflow/controllers/getBlock.js] getBlock loaded');
 
 //provide a random response
 
@@ -29,13 +29,13 @@ async function getResponse(num){
         + "Number of Uncles : " + rawBlk.uncles.length
         + "```"
     ]
-    log.debug('[dflow/controllers/getBlockNumber.js] possible responses: ' + responses); 
+    log.debug('[dflow/controllers/getBlock.js] possible responses: ' + responses); 
     return responses[Math.floor(Math.random() * responses.length)]; 
 }
 
 module.exports = async (num) =>{
     let response = getResponse(num); 
-    log.debug('[dflow/controllers/getBlockNumber.js] getResponse(): ' + response);
+    log.debug('[dflow/controllers/getBlock.js] getResponse(): ' + response);
     return{
         message : response
     }

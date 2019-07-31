@@ -4,10 +4,12 @@ require('dotenv').config();
 
 var env = require('./unit/env');
 var app = require('./unit/app');
+var webhook = require('./unit/webhook');
 
 //* end unit tests *//
 
 /* tests */
 describe('Global functions', function() {
-  env
+  env,
+  webhook
 });
