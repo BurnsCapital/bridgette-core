@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const { dialogflow } = require('actions-on-google');
+const { dialogflow, SimpleResponse } = require('actions-on-google');
 
 const server = express();
 const assistant = dialogflow();
@@ -20,8 +20,9 @@ assistant.intent('etc_getBlockNumber', async (conv) => {
 	log.debug(conv.parameters);
 	let res = await getBlockNumber(conv.parameters.Blockchain)
 
-	log.debug('[index.js] etc_getBlockNumber: req: ' + conv +' res: ' + res);
-	conv.ask( res.message );
+	log.debug('[index.js] etc_getBlockNumber: req: ' + conv +' res: ' + res.message);
+
+	conv.ask( new SimpleResponse( {text : res.message} ) );
 });
 
 assistant.intent('etc_getBalance', conv => {
@@ -84,7 +85,7 @@ assistant.intent('etc_version', conv => {
 	version()
 	.then( (res) => {
 		log.debug('[index.js] etc_version: req: ' + conv +' res: ' + res);
-		conv.ask( res.message );
+		conv.ask( new SimpleResponse( {text :res.message} ));
 	})
 	.catch((err) => {
 		log.error('[index.js] etc_version: ' + err);
