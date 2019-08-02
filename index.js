@@ -9,7 +9,7 @@ const server = express();
 //const assistant = dialogflow();
 
 const { log } = require('./lib');
-const { getBlockNumber, getBalance, getTransaction, sendSignedTransaction, getGasPrice, getBlock, version } = require( "./controllers" );
+const { getBlockNumber, getPrice, version } = require( "./controllers" );
 
 /*
 * intent flows
@@ -20,6 +20,7 @@ function WebhookProcessing(req, res) {
 	
 	let intentMap = new Map();
 	intentMap.set('etc_getBlockNumber', etc_getBlockNumber);
+	intentMap.set('getPrice', int_getPrice);
 	intentMap.set('version', etc_version);
 	agent.handleRequest(intentMap);
 }
@@ -32,6 +33,15 @@ async function etc_getBlockNumber(agent){
 			log.debug('[index.js] etc_getBlockNumber: req: ' + agent +' res: ' + res.message);
 			agent.add( res.message );
 	};
+
+async function int_getPrice(agent){
+		log.debug('[index.js] int_getPrice: ');
+		log.debug(agent.parameters);
+		let res = await getPrice(agent.parameters.Blockchain)
+		log.debug('[index.js] int_getPrice: req: ' + agent +' res: ' + res.message);
+		agent.add( res.message );
+};
+
 //admin functions
 async function etc_version(agent) {
 			let res = await version();
