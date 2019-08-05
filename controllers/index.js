@@ -9,6 +9,10 @@ var sendSignedTransaction = require('./sendSignedTransaction')
 var getGasPrice = require('./getGasPrice');
 var getBlock = require('./getBlock');
 
+// api calls
+
+var getPrice = require('./getPrice');
+
 // admin functions
 var version = require('./version');
 
@@ -21,6 +25,7 @@ module.exports = {
     sendSignedTransaction : sendSignedTransaction,
     getGasPrice : getGasPrice,
     getBlock : getBlock,
+    getPrice : getPrice,
     version : version
 }
 
