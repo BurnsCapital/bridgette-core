@@ -3,13 +3,23 @@ require("dotenv").config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const { dialogflow, SimpleResponse } = require('actions-on-google');
-const {WebhookClient} = require('dialogflow-fulfillment');
+const { WebhookClient, Image } = require('dialogflow-fulfillment');
+var fs = require('fs');
 
 const server = express();
 //const assistant = dialogflow();
 
 const { log } = require('./lib');
-const { getBlockNumber, getBalance, getTransaction, sendSignedTransaction, getGasPrice, getBlock, version } = require( "./controllers" );
+//active controllers
+const { 
+	getBlockNumber, 
+	getBalance, 
+	getTransaction, 
+	sendSignedTransaction, 
+	getGasPrice, 
+	getBlock, 
+	blockstreamSat,
+	version } = require( "./controllers" );
 
 /*
 * intent flows
@@ -20,24 +30,31 @@ function WebhookProcessing(req, res) {
 	
 	let intentMap = new Map();
 	intentMap.set('etc_getBlockNumber', etc_getBlockNumber);
+	intentMap.set('blockstreamSat', dapp_bs_sat);
 	intentMap.set('version', etc_version);
 	agent.handleRequest(intentMap);
 }
 
 
 async function etc_getBlockNumber(agent){
-			log.debug('[index.js] etc_getBlockNumber: ');
-			log.debug(agent.parameters);
-			let res = await getBlockNumber(agent.parameters.Blockchain)
-			log.debug('[index.js] etc_getBlockNumber: req: ' + agent +' res: ' + res.message);
-			agent.add( res.message );
-	};
+	log.debug('[index.js] etc_getBlockNumber: ');
+	log.debug(agent.parameters);
+	let res = await getBlockNumber(agent.parameters.Blockchain)
+	log.debug('[index.js] etc_getBlockNumber: req: ' + agent +' res: ' + res.message);
+	agent.add( res.message );
+};
+
+async function dapp_bs_sat(agent){
+	let res = await blockstreamSat(agent.parameters.message);
+	agent.add(res.message);
+    agent.add(new Image(process.env.IMAGE_URL + '?file=' +res.qr_image));
+};
 //admin functions
 async function etc_version(agent) {
-			let res = await version();
-			log.debug('[index.js] etc_version: req: ' + agent +' res: ' + res);
-			agent.add( res.message );
-	};
+	let res = await version();
+	log.debug('[index.js] etc_version: req: ' + agent +' res: ' + res);
+	agent.add( res.message );
+};
 
 //error handeling
 function fallback(agent) {
@@ -55,13 +72,25 @@ function fallback(agent) {
 
 //express server
 server.set('port', process.env.PORT || 3400);
-server.use(bodyParser.json());
+server.use(bodyParser.json({limit: '10mb', extended: true}))
+server.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
+
+
 
 server.post('/webhook', function (req, res) {
 	WebhookProcessing(req, res);
 });
 
 server.get('/', (req, res) => res.send('Hello World!'))
+
+server.get('/tempImages', function (req, res) { 
+	//really find a better way to do this
+	console.log(req.query);
+	fs.readFile(`./tempImage/${req.query.file}`, function(err,data){
+		if (err) log.error(err);
+		res.send(data);
+	})
+});
 
 server.listen(server.get('port'), function () {
 	console.log('Express server started on port', server.get('port'));
