@@ -13,11 +13,7 @@ const { log } = require('./lib');
 //active controllers
 const { 
 	getBlockNumber, 
-	getBalance, 
-	getTransaction, 
-	sendSignedTransaction, 
-	getGasPrice, 
-	getBlock, 
+	getPrice,
 	blockstreamSat,
 	version } = require( "./controllers" );
 
@@ -31,6 +27,7 @@ function WebhookProcessing(req, res) {
 	let intentMap = new Map();
 	intentMap.set('etc_getBlockNumber', etc_getBlockNumber);
 	intentMap.set('blockstreamSat', dapp_bs_sat);
+	intentMap.set('getPrice', int_getPrice);
 	intentMap.set('version', etc_version);
 	agent.handleRequest(intentMap);
 }
@@ -49,6 +46,15 @@ async function dapp_bs_sat(agent){
 	agent.add(res.message);
     agent.add(new Image(process.env.IMAGE_URL + '?file=' +res.qr_image));
 };
+
+async function int_getPrice(agent){
+	log.debug('[index.js] int_getPrice: ');
+	log.debug(agent.parameters);
+	let res = await getPrice(agent.parameters.Blockchain)
+	log.debug('[index.js] int_getPrice: req: ' + agent +' res: ' + res.message);
+	agent.add( res.message );
+};
+
 //admin functions
 async function etc_version(agent) {
 	let res = await version();

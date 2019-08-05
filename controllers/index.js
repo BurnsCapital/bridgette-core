@@ -9,8 +9,14 @@ var sendSignedTransaction = require('./sendSignedTransaction')
 var getGasPrice = require('./getGasPrice');
 var getBlock = require('./getBlock');
 
+<<<<<<< HEAD
 //dapps
 var blockstreamSat = require('./blockstreamSat.js');
+=======
+// api calls
+
+var getPrice = require('./getPrice');
+>>>>>>> master
 
 // admin functions
 var version = require('./version');
@@ -24,7 +30,11 @@ module.exports = {
     sendSignedTransaction : sendSignedTransaction,
     getGasPrice : getGasPrice,
     getBlock : getBlock,
+<<<<<<< HEAD
     blockstreamSat : blockstreamSat,
+=======
+    getPrice : getPrice,
+>>>>>>> master
     version : version
 }
 
