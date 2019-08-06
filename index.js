@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const https = require('https');
 const { dialogflow, SimpleResponse } = require('actions-on-google');
 const { WebhookClient, Image } = require('dialogflow-fulfillment');
 var fs = require('fs');
@@ -99,7 +100,11 @@ server.get('/tempImages', function (req, res) {
 	})
 });
 
-server.listen(server.get('port'), function () {
+https.createServer({
+   key: fs.readFileSync('./certs/server.key'),
+   cert: fs.readFileSync('./certs/server.cert')
+}, server)
+.listen(server.get('port'), function () {
 	console.log('Express server started on port', server.get('port'));
 });
 
