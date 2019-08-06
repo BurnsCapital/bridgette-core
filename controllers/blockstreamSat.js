@@ -34,6 +34,7 @@ module.exports = async ( payload ) => {
     return(
         {
             message : `Ok, Scanning this will send the following message: ${payload}`,
+            payReq : ticket.lightning_invoice.payreq,
             qr_image: qr_img
         }
     )

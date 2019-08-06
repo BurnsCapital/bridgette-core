@@ -44,7 +44,8 @@ async function etc_getBlockNumber(agent){
 async function dapp_bs_sat(agent){
 	let res = await blockstreamSat(agent.parameters.message);
 	agent.add(res.message);
-    agent.add(new Image(process.env.IMAGE_URL + '?file=' +res.qr_image));
+	agent.add(res.payReq);
+	//agent.add(new Image(process.env.IMAGE_URL + '?file=' +res.qr_image));
 };
 
 async function int_getPrice(agent){
