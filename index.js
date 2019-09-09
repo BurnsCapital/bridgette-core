@@ -2,7 +2,6 @@ require("dotenv").config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const https = require('https');
 const { dialogflow, SimpleResponse } = require('actions-on-google');
 const { WebhookClient, Image } = require('dialogflow-fulfillment');
 var fs = require('fs');
@@ -24,7 +23,6 @@ const {
 */
 function WebhookProcessing(req, res) {
     const agent = new WebhookClient({request: req, response: res});
-	
 	let intentMap = new Map();
 	intentMap.set('etc_getBlockNumber', etc_getBlockNumber);
 	intentMap.set('blockstreamSat', dapp_bs_sat);
@@ -100,12 +98,7 @@ server.get('/tempImages', function (req, res) {
 	})
 });
 
-https.createServer({
-   key: fs.readFileSync(process.env.VAULT_KEY),
-   cert: fs.readFileSync(process.env.VAULT_CERT),
-   ca: fs.readFileSync(process.env.VAULT_CA)
-}, server)
-.listen(server.get('port'), function () {
+server.listen(server.get('port'), function () {
 	console.log('Express server started on port', server.get('port'));
 });
 
