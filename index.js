@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const https = require('https');
 const { dialogflow, SimpleResponse } = require('actions-on-google');
 const { WebhookClient, Image } = require('dialogflow-fulfillment');
 var fs = require('fs');
@@ -23,6 +24,7 @@ const {
 */
 function WebhookProcessing(req, res) {
     const agent = new WebhookClient({request: req, response: res});
+	
 	let intentMap = new Map();
 	intentMap.set('etc_getBlockNumber', etc_getBlockNumber);
 	intentMap.set('blockstreamSat', dapp_bs_sat);
@@ -72,7 +74,6 @@ function fallback(agent) {
 	console.error(error);
 	agent.ask('I encountered a glitch. Can you say that again?');
   });
-
 */
 //endflows
 
@@ -98,7 +99,11 @@ server.get('/tempImages', function (req, res) {
 	})
 });
 
-server.listen(server.get('port'), function () {
+https.createServer({
+   key: fs.readFileSync(process.env.VAULT_KEY),
+   cert: fs.readFileSync(process.env.VAULT_CERT)
+}, server)
+.listen(server.get('port'), function () {
 	console.log('Express server started on port', server.get('port'));
 });
 
@@ -114,7 +119,6 @@ assistant.intent('etc_getBalance', agent => {
 		log.error('[index.js] etc_getBalance: ' + err);
 	});
 });
-
 assistant.intent('etc_getTransaction', agent => {
 	getTransaction(agent.parameters.transaction)
 	.then( (res) => {
@@ -125,7 +129,6 @@ assistant.intent('etc_getTransaction', agent => {
 		log.error('[index.js] etc_getTransaction: ' + err);
 	});
 });
-
 assistant.intent('etc_sendSignedTransaction', agent => {
 	sendSignedTransaction(agent.parameters.signedTX)
 	.then( (res) => {
@@ -136,7 +139,6 @@ assistant.intent('etc_sendSignedTransaction', agent => {
 		log.error('[index.js] etc_sendSignedTransaction: ' + err);
 	});
 });
-
 assistant.intent('etc_getGasPrice', agent => {
 	getGasPrice()
 	.then( (res) => {
@@ -147,7 +149,6 @@ assistant.intent('etc_getGasPrice', agent => {
 		log.error('[index.js] etc_getGasPrice: ' + err);
 	});
 });
-
 assistant.intent('etc_getBlock', agent => {
 	getBlock(agent.parameters.blockNumber)
 	.then( (res) => {
