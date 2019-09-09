@@ -1,5 +1,7 @@
-// any important stuff
+# any important stuff
 .env
+*.cert
+*.key
 
 # Logs
 logs
