@@ -102,7 +102,8 @@ server.get('/tempImages', function (req, res) {
 
 https.createServer({
    key: fs.readFileSync(process.env.VAULT_KEY),
-   cert: fs.readFileSync(process.env.VAULT_CERT)
+   cert: fs.readFileSync(process.env.VAULT_CERT),
+   ca: fs.readFileSync(process.env.VAULT_CA)
 }, server)
 .listen(server.get('port'), function () {
 	console.log('Express server started on port', server.get('port'));
