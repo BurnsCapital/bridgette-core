@@ -7,9 +7,6 @@ pipeline {
     }
   }
 
-  environment {
-  }
-  
   parameters {
     string(
       name: 'CON_REPO',
