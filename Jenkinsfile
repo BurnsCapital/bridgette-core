@@ -13,7 +13,7 @@ pipeline {
   parameters {
     string(
       name: 'CON_REPO',
-      description: 'path to container repo'
+      description: 'path to container repo',
       defaultVaule: 'localhost'
     )
 
@@ -25,6 +25,7 @@ pipeline {
 	npm install
       }
     }
+
     stage('Unit Test')
       steps {
         echo 'Testing..'
@@ -43,6 +44,7 @@ pipeline {
         """
       }
     }
+
     stage('Deploy Containers'){
       steps{
 	docker push ${CON_REPO}/bridgette-core:${params.BRANCH}
