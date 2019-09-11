@@ -16,6 +16,7 @@ pipeline {
       description: 'path to container repo',
       defaultVaule: 'localhost'
     )
+  }
 
   stages {
 
