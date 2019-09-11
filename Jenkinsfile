@@ -23,11 +23,11 @@ pipeline {
     stage('Install Deps') {
       steps {
         echo "Installing Deps..."
-	npm install
+	      npm install
       }
     }
 
-    stage('Unit Test')
+    stage('Unit Test') {
       steps {
         echo 'Testing..'
         sh """
@@ -36,7 +36,7 @@ pipeline {
       }
     }
 
-    stage('Containerize')
+    stage('Containerize') {
       steps {
         echo 'Containerizing..'
         sh """
@@ -49,9 +49,9 @@ pipeline {
     stage('Deploy Containers'){
       steps{
         sh """
-	docker push ${CON_REPO}/bridgette-core:${params.BRANCH}
+	      docker push ${CON_REPO}/bridgette-core:${params.BRANCH}
         """
-	}
+	    }
     }
   }
 }
