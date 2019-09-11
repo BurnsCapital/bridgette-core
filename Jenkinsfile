@@ -3,7 +3,6 @@ pipeline {
     dockerfile {
       dir 'jenkins'
       args '--volume /var/run/docker.sock:/var/run/docker.sock'
-      label 'docker'
     }
   }
 
