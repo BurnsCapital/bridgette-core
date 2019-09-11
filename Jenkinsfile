@@ -47,7 +47,9 @@ pipeline {
 
     stage('Deploy Containers'){
       steps{
+        sh """
 	docker push ${CON_REPO}/bridgette-core:${params.BRANCH}
+        """
 	}
     }
 }
