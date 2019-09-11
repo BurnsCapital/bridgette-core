@@ -14,7 +14,7 @@ pipeline {
     string(
       name: 'CON_REPO',
       description: 'path to container repo',
-      defaultVaule: 'localhost'
+      defaultValue: 'localhost'
     )
   }
 
