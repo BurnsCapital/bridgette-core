@@ -8,7 +8,7 @@ var getTransaction = require('./getTransaction');
 var sendSignedTransaction = require('./sendSignedTransaction')
 var getGasPrice = require('./getGasPrice');
 var getBlock = require('./getBlock');
-
+var forkName = require('./forkname');
 
 //dapps
 var blockstreamSat = require('./blockstreamSat.js');
@@ -20,6 +20,7 @@ var version = require('./version');
 log.info('[dflow/controllers/index.js] controllers loaded');
 
 module.exports = {
+    forkName : forkName,
     getBlockNumber : getBlockNumber,
     getBalance : getBalance,
     getTransaction : getTransaction,
