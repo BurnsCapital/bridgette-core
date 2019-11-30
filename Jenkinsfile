@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {	  
+    dockerfile {	
+      dir 'jenkins'	
+      args '--volume /var/run/docker.sock:/var/run/docker.sock'	
+    }	
+  }
   parameters {
     string(
       name: 'CON_REPO',
